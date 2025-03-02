@@ -22,7 +22,7 @@ This project is designed to enable robust, fault-tolerant data streaming by leve
   
   ## Future Features
 - Live data analysis
-- More data visualization in web app UI
+- More data visualization and interaction in web app UI
 
 ## Tools:
 * Python
