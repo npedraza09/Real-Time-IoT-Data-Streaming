@@ -1,4 +1,4 @@
-<a href="hhttps://nicopedrazaportfolio.netlify.app/">Back to My Portfolio</a>
+<a href="https://nicopedrazaportfolio.netlify.app/">Back to My Portfolio</a>
 
 # 📡 Real-Time IoT Data Streaming
 
