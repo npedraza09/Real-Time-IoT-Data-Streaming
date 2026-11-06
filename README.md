@@ -1,45 +1,27 @@
-<a href="https://nicopedrazaportfolio.netlify.app/">Back to My Portfolio</a>
+# Real-Time IoT Data Streaming
 
-# 📡 Real-Time IoT Data Streaming
+A Kafka pipeline that streams simulated vehicle GPS coordinates from a Python producer to a Node.js consumer. Built for my MIT Professional Certificate in Data Engineering (2024–2025).
 
-This project is designed to enable robust, fault-tolerant data streaming by leveraging Confluent’s Docker image for ZooKeeper, the Kafka broker, and Control Center. Real-time vehicle location data is produced through a Python client and consumed by a Node.js web server, which visualizes IoT streams in a user-friendly interface. By uniting Docker, Python, and Node.js, the system ensures seamless message production, consumption, and fault-tolerant data handling, illustrating a comprehensive, end-to-end approach to real-time data processing.
+## How it works
 
+1. **Kafka cluster:** Confluent's Docker images run ZooKeeper, the Kafka broker and Control Center (`RealTimeIotDataStreaming/kafka-docker/`).
+2. **Producer:** `pythonProducer/PublishVehicleCoordinates.py` creates the `vehicle-coordinates` topic if needed and publishes a random longitude and latitude every 3 seconds.
+3. **Consumer:** an Express server (`NodeJSConsumer/server.js`) serves a page with a button that reads the topic using node-rdkafka (`myconsumer.js`, adapted from Confluent's example).
 
-## Steps to run this project
-1. Either fork or download the folder in this repository and open it in your code editor
-2. Install all necesssary dependencies
-3. In your Terminal, navigate to RealTimeIotDataStreaming/kafka-docker and run `docker-compose up` to create and start the Kafka container
-4. Open your browser and navigate to http://localhost:9021. This is the Confluent Control Center, and it will allow you to check the status of the Kafka cluster that you spun up
-5. In the Confluent Control Center, navigate to topics, add a topic named "vehicle-coordinates", set the number of partitions to 1, and select "Create with default settings"
-6. In a Terminal window, navigate to the "RealTimeIotDataStreaming" folder. Start the web page by running the following command: `node server.js`
-7. Navigate to http://localhost:5000. Your web page should be titled “Confluence Kafka REST” and have a button labeled “Consume Vehicle Coordinates”
-8. Select the “Consume Vehicle Coordinates” button to verify that your data is being consumed and that there are no errors
+**Built with:** Apache Kafka (Confluent), Docker, Python (kafka-python), Node.js, Express, node-rdkafka
 
-## Features
-- Simulated stream of real-time vehicle location
-- Visualization of IoT streams in a user-friendly interface
-- Data consumed in node.js server
-  
-  ## Future Features
-- Live data analysis
-- Enhance web app aesthetics
-- More data visualization and interaction in web app UI
+## Run it locally
 
-## Tools:
-* Python
-* JavaScript
-* JSON
-* Kafka
-* Node.js
-* Libraries: Kafka
+You need Docker, Python 3 and Node.js.
 
-## What the project looks like
+1. From `RealTimeIotDataStreaming/kafka-docker/`, run `docker-compose up`.
+2. Open Confluent Control Center at http://localhost:9021 and create a topic named `vehicle-coordinates` with 1 partition.
+3. Start the producer: `pip install kafka-python`, then `python pythonProducer/PublishVehicleCoordinates.py`.
+4. From `RealTimeIotDataStreaming/NodeJSConsumer/`, run `npm install`, then `node server.js`.
+5. Open http://localhost:5000 and click **Consume Vehicle Coordinates**.
 
-<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/d7496ab1-0944-4126-8eff-1a0c56d8cd3e" />
+## Screenshots
 
-<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/536c5cce-bc77-4298-9214-1cd70facfc24" />
+<img width="800" height="400" alt="Real-Time IoT Data Streaming screenshot" src="https://github.com/user-attachments/assets/d7496ab1-0944-4126-8eff-1a0c56d8cd3e" />
 
-
-
-
-
+<img width="800" height="400" alt="Real-Time IoT Data Streaming screenshot" src="https://github.com/user-attachments/assets/536c5cce-bc77-4298-9214-1cd70facfc24" />
